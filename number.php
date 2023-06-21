@@ -102,6 +102,8 @@ switch($method){
             $rsql = mysqli_query($cnx,"delete from $table where id = '$id'  ") or die('Unable to query'.mysqli_error($cnx));
             $arrMessage['message']=mysqli_affected_rows($cnx)." deleted Successfully!!!"; 
             http_response_code(200);
+            @trail("$id was deleted in table $table");
+
         }
         
        
