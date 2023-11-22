@@ -19,5 +19,5 @@ while($tab=mysqli_fetch_assoc($rsql)){
     sendMessage("&message=$message&mobiles=0$phnum");
 }
 
-mysqli_query($cnx,"update $tablevs set done='Y' where id="$mvid"  ") or die('Unable to query'.mysqli_error($cnx));
+mysqli_query($cnx,"update $tablevs set done='Y' where id='$mvid'  ") or die('Unable to query'.mysqli_error($cnx));
 @trail("$mvid memory verse was sent ");
