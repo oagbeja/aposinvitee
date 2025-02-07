@@ -25,32 +25,3 @@ AddHandler cgi-script .pl .py .jsp .sh .asp .aspx .cs .cgi .obj .exe .pas .vb
 # RewriteCond %{HTTP_REFERER} !^$  
 # RewriteCond %{HTTP_REFERER} !^http://([ -a-z0-9]  \.)?bonaventuremolokwu\.info [NC]  
 # RewriteRule \.(gif|jpe?g|png)$ - [F,NC,L]
-
-# BLOCKING REQUESTS BASED ON USER-AGENT HEADER
-SetEnvIfNoCase ^User-Agent$ .*(craftbot|download|extract|stripper|sucker|ninja|clshttp|webspider|leacher|collector|grabber|webpictures) HTTP_SAFE_BADBOT
-SetEnvIfNoCase ^User-Agent$ .*(libwww-perl|aesop_com_spiderman) HTTP_SAFE_BADBOT
-Deny from env=HTTP_SAFE_BADBOT
-
-# BAN USER-AGENTS, REFERRERS, SCRIPTS, SCRIPT-KIDDIES AND MORE...
-RewriteCond %{HTTP_USER_AGENT} ^BackWeb [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} ^Bandit [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} ^BatchFTP [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} ^BecomeBot [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} ^BlackWidow [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} ^Net\ Vampire [NC]
-RewriteRule . abuse.txt [L]
-
-# why not come visit me directly?
-RewriteCond %{HTTP_REFERER} \.opendirviewer\. [NC,OR]
-# this prevents stoopid cross-site discovery attacks..
-RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
-# please stop pretending to be the Googlebot..
-RewriteCond %{HTTP_REFERER} users\.skynet\.be.* [NC,OR]
-# really, we need a special page for these twats..
-RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
-RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
-RewriteCond %{REQUEST_URI} owssvr\.dll [NC,OR]
-RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
-RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} Sucker [NC]
-RewriteRule . abuse.txt [L]
